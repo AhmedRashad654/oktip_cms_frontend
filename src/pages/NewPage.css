@@ -1,0 +1,91 @@
+/* الخلفية الرئيسية */
+.new-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    /* background-color: #00040f; الخلفية الداكنة */
+    padding: 20px;
+  }
+  
+  /* الحاوية الكبيرة */
+  .content-container {
+    display: flex;
+    gap: 40px;
+     /* width: 1280px;
+    height: 388px;  */
+    align-items: center;
+    background: #a7163f;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative; /* لجعل الصورة المطلقة تعتمد على هذه الحاوية */
+    overflow: visible; /* السماح للصورة بالخروج من الحاوية */
+}
+  
+  /* الصورة على اليسار */
+  .image-container {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .illustration-image {
+    max-width: 50%;
+    border-radius: 16px;
+  }
+  
+  /* النص والأزرار على اليمين */
+  .text-and-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* محاذاة النصوص والأزرار إلى اليمين */
+    text-align: right; /* محاذاة النصوص من الناحية اليمنى */
+    gap: 16px; /* مسافة بين النصوص والأزرار */
+  }
+  
+  /* العنوان */
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 16px;
+  }
+  
+  /* النص الفرعي */
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+  
+  /* الحاوية الخاصة بالأزرار */
+  .buttons-container {
+    display: flex;
+    justify-content: flex-end; /* لدفع الزرَّين إلى أقصى اليمين */
+    gap: 16px; /* لإضافة مسافة بين الزرَّين */
+  }
+  
+  /* الأزرار */
+  .action-button {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: none;
+    color: #ffffff; /* لون النص داخل الأزرار */
+    height: 56px;
+    padding: 10px 40px;
+    border-radius: 24px;
+    background: linear-gradient(67deg, #e9ba00 -24.26%, #ff2a66 41.56%);
+  }
+  
+  .action-button:hover {
+    background: linear-gradient(67deg, #e9ba00 -10%, #ff2a66 50%);
+  }
+  .image-container img {
+    width: 704.051px;
+height: 449.566px;
+    border-radius: 16px;
+    position: absolute;
+    left: -60px; 
+    top: 50%;
+    transform: translateY(-50%); 
+}
+  

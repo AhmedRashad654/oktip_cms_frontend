@@ -1,0 +1,19 @@
+/* 
+.accordion-container {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .accordion-item {
+    transition: all 0.3s ease-in-out;
+
+  }
+  .accordion-item {
+    width: 100%; 
+    max-width: 700px; 
+    direction: rtl; 
+}
+  
+  .accordion-item:hover {
+    transform: scale(1.02);
+  }
+ */

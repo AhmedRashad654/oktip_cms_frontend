@@ -1,0 +1,65 @@
+/* Home.css */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    padding: 20px;
+    color: #ffffff;
+    position: relative; /* مهم لتفعيل ::before */
+    background: url('/Leonardo_Phoenix_10_Design_a_vibrant_and_colorful_banner_for_t_3 (1) 1.png') no-repeat center center;
+    background-size: cover;
+  }
+  
+  .home-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #00040F 2.49%, rgba(0, 4, 15, 0.00) 40.86%, #00040F 84.56%);
+    z-index: 1; 
+    pointer-events: none; 
+  }
+  
+  .logo-container,
+  .title,
+  .subtitle,
+  .start-button {
+    position: relative; 
+    z-index: 2;
+  }
+  
+  
+  .title {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .subtitle {
+    margin-bottom: 30px;
+    max-width: 600px;
+  }
+  
+  .start-button {
+    background-color: #ff0055;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+  }
+  .svg-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  
+  
+  
