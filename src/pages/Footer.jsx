@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Typography,
@@ -9,6 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import Whatsappicon from "./icons/Whatsappicon";
+import { Link as LinkReact } from "react-router-dom";
 import Telegram from "./icons/Telegram";
 import Twitter from "./icons/Twitter";
 import Facebook from "./icons/Facebook";
@@ -63,7 +64,6 @@ const Footer = ({ language }) => {
             sx={{
               marginBottom: "16px",
               fontWeight: 700,
-              textAlign: "center",
               direction: "rtl",
               fontFamily: "Tajawal",
               fontSize: { xs: "14px", md: "16px" },
@@ -284,30 +284,32 @@ const Footer = ({ language }) => {
             {language === "en" ? "Platform policies" : "سياسات المنصة"}
           </Typography>
           <Box>
-            <Link
-              href="/privacy-policy"
-              color="inherit"
-              underline="none"
-              display="block"
-              sx={{
-                marginBottom: "8px",
-                fontWeight: "400",
-                fontSize: { xs: "14px", md: "16px" },
-                fontFamily: "Tajawal",
-              }}
-            >
-              {language === "en" ? "privacy policy" : "سياسة الخصوصية"}
-            </Link>
-
-            <Link
-              href="/terms-ofuse"
-              color="inherit"
-              underline="none"
-              display="block"
-              sx={{ marginBottom: "8px" }}
-            >
-              {language === "en" ? "terms of use" : "شروط الاستخدام"}
-            </Link>
+            <LinkReact to="/privacy-policy">
+              <Link
+                color="inherit"
+                underline="none"
+                display="block"
+                sx={{
+                  marginBottom: "8px",
+                  fontWeight: "400",
+                  fontSize: { xs: "14px", md: "16px" },
+                  fontFamily: "Tajawal",
+                }}
+              >
+                {language === "en" ? "privacy policy" : "سياسة الخصوصية"}
+              </Link>
+            </LinkReact>
+            <LinkReact to="/terms-ofuse">
+              <Link
+                href="/terms-ofuse"
+                color="inherit"
+                underline="none"
+                display="block"
+                sx={{ marginBottom: "8px" }}
+              >
+                {language === "en" ? "terms of use" : "شروط الاستخدام"}
+              </Link>
+            </LinkReact>
             <Link
               href="#"
               color="inherit"
