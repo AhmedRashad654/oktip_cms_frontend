@@ -67,7 +67,7 @@ function StyledPage({ category, language, safety }) {
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: { xs: "10px", sm: "15px", md: "20px" },
-            margin: { xs: "20px 0", sm: "30px 0", md: "40px 0" },
+            margin: { xs: "20px 0", sm: "30px 0", md: "40px 0 20px 0" },
             padding: { xs: "0 5px", sm: "0 10px" },
           }}
         >
@@ -142,14 +142,12 @@ function StyledPage({ category, language, safety }) {
             display: "flex",
             justifyContent: "center",
             width: "100%",
-            marginTop: "auto",
             padding: { xs: "0 5px", sm: "0 10px" },
           }}
         >
           <Card
             sx={{
               width: "100%",
-              maxWidth: { xs: "100%", sm: "440px", md: "480px" },
               height: { xs: "100px", sm: "116px", md: "126px" },
               borderRadius: { xs: "15px", sm: "20px" },
               position: "relative",

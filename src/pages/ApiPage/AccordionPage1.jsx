@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Typography, Box, useTheme } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -52,7 +52,7 @@ const AccordionPage1 = ({data ,language}) => {
               color: isDarkMode ? "#FFFFFF" : "#333",
               borderRadius: "12px",
               marginBottom: "20px",
-              boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
+              // boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
               "&:before": { display: "none" },
               width: "100%",
               maxWidth: "800px",

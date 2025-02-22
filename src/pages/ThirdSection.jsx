@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import {
   Grid,
@@ -18,6 +17,7 @@ function ThirdSection({ whyUs, language }) {
         bgcolor: isDarkMode ? "#00040F" : "#FFFFFF",
         py: { xs: 6, sm: 8, md: 10 },
       }}
+      id="why us"
     >
       <Container maxWidth="lg">
         <Typography
@@ -31,7 +31,7 @@ function ThirdSection({ whyUs, language }) {
             textAlign: "center",
           }}
         >
-          !؟ OKpin لماذا
+          {language === "en" ? "?Why OKpin" : "؟ OKpin لماذا"}
         </Typography>
 
         <Grid
@@ -59,7 +59,7 @@ function ThirdSection({ whyUs, language }) {
                         maxWidth: { xs: "100%", sm: "220px", md: "240px" },
                         mx: "auto",
                         borderRadius: { xs: "30px", sm: "35px", md: "40px" },
-                        bgcolor: isDarkMode ? "#13131a" : "#f5f5f5",
+                        bgcolor: isDarkMode ? "#000516" : "#f5f5f5",
                         position: "relative",
                         transition: "transform 0.3s",
                         display: "flex",

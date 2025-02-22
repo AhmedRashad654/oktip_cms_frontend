@@ -1,10 +1,8 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Box, Typography } from "@mui/material";
-
 const images = ["/Rectangle.png", "/Rectangle2.png", "/Rectangle3.png"];
 
-function SecondSection({ welcome, language }) {
+function SecondSection({ welcome, language, darkMode }) {
   return (
     <Box
       className="second-section"
@@ -13,21 +11,18 @@ function SecondSection({ welcome, language }) {
         flexDirection: { xs: "column", md: "row" }, // عكس الاتجاه في الشاشات الكبيرة فقط
         alignItems: "center",
         justifyContent: "space-between",
-        gap:"40px",
+        gap: "40px",
         paddingY: "50px",
-        paddingX:{md:"80px",xs:"20px"},
-        backgroundColor: "#00040f",
+        paddingX: { md: "80px", xs: "20px" },
+        backgroundColor: darkMode ? "#00040f" : "",
         color: "white",
-       
       }}
     >
-  
-
       {/* قسم الصور بالكامل */}
       <Box
         sx={{
           display: "flex",
-          flexDirection: {md: "row",xs:"column"},
+          flexDirection: { md: "row", xs: "column" },
           alignItems: "center",
           justifyContent: "center",
           gap: "20px",
@@ -42,7 +37,7 @@ function SecondSection({ welcome, language }) {
             display: "flex",
             flexDirection: "column",
             gap: "20px",
-            width: { md: "250px",xs:"300px" },
+            width: { md: "250px", xs: "300px" },
           }}
         >
           <Box
@@ -99,7 +94,7 @@ function SecondSection({ welcome, language }) {
         >
           {/* الصف المتحرك الأول */}
           <Box
-            className="marquee-container"
+            // className="marquee-container"
             sx={{
               width: "150px",
               height: "460px",
@@ -107,11 +102,10 @@ function SecondSection({ welcome, language }) {
             }}
           >
             <motion.div
-              className="marquee"
               animate={{ y: ["0%", "-50%"] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
             >
-              {welcome?.images.concat(images).map((src, index) => (
+              {welcome?.images?.concat(images).map((src, index) => (
                 <Box
                   component="img"
                   key={index}
@@ -130,7 +124,7 @@ function SecondSection({ welcome, language }) {
 
           {/* الصف المتحرك الثاني */}
           <Box
-            className="marquee-container"
+            // className="marquee-container"
             sx={{
               width: "150px",
               height: "460px",
@@ -140,7 +134,7 @@ function SecondSection({ welcome, language }) {
             <motion.div
               className="marquee"
               animate={{ y: ["-50%", "0%"] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
             >
               {welcome?.images.concat(images).map((src, index) => (
                 <Box
@@ -160,16 +154,16 @@ function SecondSection({ welcome, language }) {
           </Box>
         </Box>
       </Box>
-          {/* قسم النصوص */}
+      {/* قسم النصوص */}
       <Box
         className="text-section"
         sx={{
           flex: 1,
-         
+
           paddingBottom: { xs: "30px", md: "0px" },
           order: { xs: 1, md: 0 },
           width: "100%",
-     textAlign:language === "en"?"left":"right",
+          textAlign: language === "en" ? "left" : "right",
         }}
       >
         <Typography
@@ -180,7 +174,6 @@ function SecondSection({ welcome, language }) {
             fontSize: "32px",
             fontWeight: "700",
             lineHeight: "180%",
-      
           }}
         >
           {welcome?.title[language]}
@@ -193,6 +186,7 @@ function SecondSection({ welcome, language }) {
             fontWeight: "500",
             lineHeight: "180%",
             marginTop: "20px",
+            color: darkMode ? "white" : "black",
           }}
         >
           {welcome?.description[language]}

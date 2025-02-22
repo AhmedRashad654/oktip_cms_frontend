@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Typography,
   Button,
@@ -33,18 +32,19 @@ function Home({ darkMode, language }) {
 
   return (
     <>
-      <Backdrop sx={{ color: "#fff", zIndex: 1201 }} open={isLoading}>
+      <Backdrop sx={{ color: "#fff", zIndex: 1201 }} open={isLoading} >
         <CircularProgress color="inherit" />
       </Backdrop>
       <Box
         className="home-container"
+        id="/"
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
-         
+
           height: isMobile ? "auto" : "100vh",
           padding: "20px",
           paddingTop: isMobile ? "100px" : "60px",
@@ -168,7 +168,7 @@ function Home({ darkMode, language }) {
             fontFamily: "Tajawal, sans-serif",
             fontWeight: 500,
             fontSize: isMobile ? "14px" : "24px",
-            textAlign: "center",
+
             maxWidth: isMobile ? "75%" : "70%",
             margin: "0 auto",
             marginBottom: isMobile ? "0.5rem" : "1.5rem",
@@ -212,7 +212,7 @@ function Home({ darkMode, language }) {
             },
           }}
         >
-          {language === "ar" ?"!ابدأ الآن معنا" :"Start Now Us"}
+          {language === "ar" ? "!ابدأ الآن معنا" : "Start Now Us"}
         </Button>
         <div className="svg-divider">
           {[...Array(10)].map((_, index) => (
@@ -260,7 +260,11 @@ function Home({ darkMode, language }) {
         </div>
       </Box>
 
-      <SecondSection welcome={data?.data?.welcome} language={language} />
+      <SecondSection
+        welcome={data?.data?.welcome}
+        language={language}
+        darkMode={darkMode}
+      />
       <ThirdSection whyUs={data?.data?.whyUs} language={language} />
       <FourdSection offer={data?.data?.offer[0]} language={language} />
       <StepsPage
@@ -273,11 +277,14 @@ function Home({ darkMode, language }) {
         step={data?.data?.step}
         language={language}
       />
-      <NewPage download={data?.data?.download[0]} language={language}/>
-      <StyledPage category={ data?.data?.category } language={ language } safety={data?.data?.safety } />
-      <AccordionPage faq={ data?.data?.faq } language={ language }/>
-      <FeatureSection apiSection={ data?.data?.apiSection} language={language} />
-   
+      <NewPage download={data?.data?.download[0]} language={language} />
+      <StyledPage
+        category={data?.data?.category}
+        language={language}
+        safety={data?.data?.safety}
+      />
+      <AccordionPage faq={data?.data?.faq} language={language} />
+      <FeatureSection apiSection={data?.data?.apiSection} language={language} />
     </>
   );
 }

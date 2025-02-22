@@ -15,6 +15,7 @@ const AccordionPage = ({faq,language}) => {
 
   return (
     <Box
+      id="faq"
       sx={{
         backgroundColor: theme.palette.mode === 'dark' ? '#050A17' : '#FFFFFF',
         // minHeight: '2100vh',

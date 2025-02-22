@@ -11,6 +11,7 @@ const FeatureSection = ({apiSection,language}) => {
   const theme = useTheme();
   return (
     <Box
+    id="api"
       sx={{
         backgroundColor: theme.palette.mode=== 'dark' ? "#170B23" : "#FFFBD3",
         minHeight: '10vh',

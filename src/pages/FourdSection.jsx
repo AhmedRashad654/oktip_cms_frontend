@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Button, useTheme, styled } from "@mui/material";
 
-const SectionWrapper = styled(Box)(({ theme }) => ({
+const SectionWrapper = styled(Box)(({ theme, language }) => ({
   width: "100%",
   height: 350,
   position: "relative",
@@ -27,8 +27,12 @@ const SectionWrapper = styled(Box)(({ theme }) => ({
     height: "100%",
     background:
       theme.palette.mode === "dark"
-        ? "linear-gradient(270deg, #050A17 0%, rgba(5, 10, 23, 0.90) 52.53%, rgba(5, 10, 23, 0.60) 97.53%)"
-        : "linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0.90) 52.53%, rgba(255, 255, 255, 0.30) 97.53%)",
+        ? language === "ar"
+          ? "linear-gradient(270deg, #050A17 0%, rgba(5, 10, 23, 0.90) 52.53%, rgba(5, 10, 23, 0.60) 97.53%)"
+          : "linear-gradient(90deg, #050A17 0%, rgba(5, 10, 23, 0.90) 52.53%, rgba(5, 10, 23, 0.60) 97.53%)"
+        : language === "ar"
+        ? "linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0.90) 52.53%, rgba(255, 255, 255, 0.30) 97.53%)"
+        : "linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0.90) 52.53%, rgba(255, 255, 255, 0.30) 97.53%)",
     zIndex: 1,
   },
 
@@ -102,7 +106,7 @@ const StartButton = styled(Button)(({ theme }) => ({
 function FourdSection({ offer, language }) {
   const theme = useTheme();
   return (
-    <SectionWrapper>
+    <SectionWrapper id="rewards system" language={language}>
       <ContentOverlay language={language}>
         <ContentContainer>
           <Typography
@@ -115,7 +119,6 @@ function FourdSection({ offer, language }) {
               marginBottom: 2,
               lineHeight: { xs: "36px", md: "57px" },
               letterSpacing: "-0.154px",
-            
             }}
           >
             {offer?.title[language]}
@@ -136,8 +139,7 @@ function FourdSection({ offer, language }) {
           </Typography>
 
           <StartButton variant="contained" disableElevation>
-            {language === "ar"?"ابدأ الآن معنا":"Start Now "}
-           
+            {language === "ar" ? "ابدأ الآن معنا" : "Start Now "}
           </StartButton>
         </ContentContainer>
       </ContentOverlay>

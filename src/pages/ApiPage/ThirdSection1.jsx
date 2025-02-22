@@ -15,29 +15,7 @@ function ThirdSection1({language,data}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   // الأرقام الخاصة بالكروت التي نريد جلبها من الـ API
-  //   const cardOrders = [1, 2, 3, 4];
 
-  //   const fetchCards = async () => {
-  //     try {
-  //       // ✅ جلب البيانات لكل الكروت في وقت واحد باستخدام Promise.all
-  //       const responses = await Promise.all(
-  //         cardOrders.map((order) =>
-  //           axiosInstance.get(`/api-page/why-ok/${order}`).then((res) => res.data)
-  //         )
-  //       );
-
-  //       setCards(responses); // تخزين البيانات في الـ state
-  //     } catch (err) {
-  //       setError("فشل تحميل البيانات");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchCards();
-  // }, []);
 
   // أيقونات الكروت مرتبة حسب `order`
   const icons = {
@@ -96,7 +74,7 @@ function ThirdSection1({language,data}) {
                   elevation={4}
                   sx={{
                     borderRadius: "40px",
-                    backgroundColor: isDarkMode ? "#13131A" : "#FFFFFF",
+                    backgroundColor: isDarkMode ? "#000516" : "#FFFFFF",
                     textAlign: "center",
                     padding: "20px",
                     height: "240px",

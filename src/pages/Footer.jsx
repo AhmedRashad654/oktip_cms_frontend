@@ -13,13 +13,13 @@ import { Link as LinkReact } from "react-router-dom";
 import Telegram from "./icons/Telegram";
 import Twitter from "./icons/Twitter";
 import Facebook from "./icons/Facebook";
-import Apple from "./icons/Apple";
+import { FaApple } from "react-icons/fa";
 import Appstore from "./icons/Appstore";
 import ControlPanelModal from "./ControlPanelModal";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../axios/axios";
 import { useNavigate } from "react-router-dom";
-const Footer = ({ language }) => {
+const Footer = ({ language, darkMode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const theme = useTheme();
@@ -171,7 +171,11 @@ const Footer = ({ language }) => {
                   gap: "4px",
                 }}
               >
-                <Apple sx={{ fontSize: "14px" }} /> {/* الأيقونة على اليسار */}
+                <FaApple
+                  color={darkMode ? "white" : "black"}
+                  fontSize={"20px"}
+                />
+
                 <Typography
                   variant="body2"
                   sx={{
@@ -218,10 +222,13 @@ const Footer = ({ language }) => {
             <IconButton
               href={data?.data?.xWebsite}
               sx={{
-                color: theme.palette.mode === "dark" ? "#FFFFFF" : "#000000",
-                backgroundColor:
-                  theme.palette.mode === "dark" ? "#090F21" : "#F5F5F5",
+                color: "black",
+                backgroundColor: "black",
                 borderRadius: "50%",
+                padding: "15px",
+                "&:hover": {
+                  backgroundColor: "black",
+                },
               }}
             >
               <Twitter />
@@ -230,9 +237,11 @@ const Footer = ({ language }) => {
               href={data?.data?.WhatsApp}
               sx={{
                 color: theme.palette.mode === "dark" ? "#FFFFFF" : "#000000",
+
                 backgroundColor:
-                  theme.palette.mode === "dark" ? "#090F21" : "#F5F5F5",
+                  theme.palette.mode === "dark" ? "#090F21" : "#DFE3E7",
                 borderRadius: "50%",
+                padding: "13px",
               }}
             >
               <Whatsappicon />
@@ -242,8 +251,9 @@ const Footer = ({ language }) => {
               sx={{
                 color: theme.palette.mode === "dark" ? "#FFFFFF" : "#000000",
                 backgroundColor:
-                  theme.palette.mode === "dark" ? "#090F21" : "#F5F5F5",
+                  theme.palette.mode === "dark" ? "#090F21" : "#DFE3E7",
                 borderRadius: "50%",
+                padding: "13px",
               }}
             >
               <Telegram />
@@ -255,6 +265,12 @@ const Footer = ({ language }) => {
                 backgroundColor:
                   theme.palette.mode === "dark" ? "#090F21" : "#0059FF",
                 borderRadius: "50%",
+                padding: "12px",
+                height: "46px",
+                "&:hover": {
+                  backgroundColor:
+                    theme.palette.mode === "dark" ? "#090F21" : "#0059FF",
+                },
               }}
             >
               <Facebook />
@@ -284,43 +300,11 @@ const Footer = ({ language }) => {
             {language === "en" ? "Platform policies" : "سياسات المنصة"}
           </Typography>
           <Box>
-            <LinkReact to="/privacy-policy">
-              <Link
-                color="inherit"
-                underline="none"
-                display="block"
-                sx={{
-                  marginBottom: "8px",
-                  fontWeight: "400",
-                  fontSize: { xs: "14px", md: "16px" },
-                  fontFamily: "Tajawal",
-                }}
-              >
-                {language === "en" ? "privacy policy" : "سياسة الخصوصية"}
-              </Link>
-            </LinkReact>
-            <LinkReact to="/terms-ofuse">
-              <Link
-                href="/terms-ofuse"
-                color="inherit"
-                underline="none"
-                display="block"
-                sx={{ marginBottom: "8px" }}
-              >
-                {language === "en" ? "terms of use" : "شروط الاستخدام"}
-              </Link>
-            </LinkReact>
             <Link
-              href="#"
-              color="inherit"
-              underline="none"
-              display="block"
-              sx={{ marginBottom: "8px" }}
-            >
-              {language === "en" ? "service API" : "خدمة API"}
-            </Link>
-            <Link
-              href="#"
+              onClick={() => {
+                navigate("/privacy-policy");
+                window.scrollTo(0, 0);
+              }}
               color="inherit"
               underline="none"
               display="block"
@@ -329,6 +313,52 @@ const Footer = ({ language }) => {
                 fontWeight: "400",
                 fontSize: { xs: "14px", md: "16px" },
                 fontFamily: "Tajawal",
+                curor: "pointer",
+              }}
+            >
+              {language === "en" ? "privacy policy" : "سياسة الخصوصية"}
+            </Link>
+
+            <Link
+              onClick={() => {
+                navigate("/terms-ofuse");
+                window.scrollTo(0, 0);
+              }}
+              color="inherit"
+              underline="none"
+              display="block"
+              sx={{ marginBottom: "8px", cursor: "pointer" }}
+            >
+              {language === "en" ? "terms of use" : "شروط الاستخدام"}
+            </Link>
+
+            <Link
+              onClick={() => {
+                navigate("/APiPage");
+                window.scrollTo(0, 0);
+              }}
+              color="inherit"
+              underline="none"
+              display="block"
+              sx={{ marginBottom: "8px", cursor: "pointer" }}
+            >
+              {language === "en" ? "service API" : "خدمة API"}
+            </Link>
+
+            <Link
+              onClick={() => {
+                navigate("/about-us");
+                window.scrollTo(0, 0);
+              }}
+              color="inherit"
+              underline="none"
+              display="block"
+              sx={{
+                marginBottom: "8px",
+                fontWeight: "400",
+                fontSize: { xs: "14px", md: "16px" },
+                fontFamily: "Tajawal",
+                cursor: "pointer",
               }}
             >
               {language === "en" ? "about OKpin" : " عن OKpin"}
@@ -443,3 +473,14 @@ const Footer = ({ language }) => {
 };
 
 export default Footer;
+
+
+
+
+
+
+
+
+
+
+

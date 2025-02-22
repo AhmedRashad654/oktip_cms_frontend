@@ -108,10 +108,8 @@ function Layout({ darkMode, setDarkMode, language, setLanguage }) {
         />
       )}
       <Outlet />
-          {location.pathname !== "/dashboard" && (
-        <Footer
-          language={language}   
-        />
+      {location.pathname !== "/dashboard" && (
+        <Footer language={language} darkMode={darkMode} />
       )}
     </>
   );
