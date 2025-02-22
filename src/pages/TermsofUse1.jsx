@@ -24,6 +24,7 @@ const TermsOfUse1 = ({ theme, language }) => {
     queryKey: ["getTrumsUserPage", language],
     queryFn: getTrumsUserPage,
   });
+  console.log("alaa", data);
   return (
     <>
       <Backdrop sx={{ color: "#fff", zIndex: 1201 }} open={isLoading}>
@@ -32,7 +33,7 @@ const TermsOfUse1 = ({ theme, language }) => {
       <Box
         sx={{
           width: "100%",
-          height: "100vh",
+          minHeight: "100vh",
           backgroundImage: `url(${background})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -47,7 +48,6 @@ const TermsOfUse1 = ({ theme, language }) => {
         <Box
           sx={{
             width: "95%",
-            minHeight: "70vh",
             backgroundColor: containerBackgroundColor,
             borderRadius: "15px",
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
@@ -63,15 +63,15 @@ const TermsOfUse1 = ({ theme, language }) => {
           </Box>
 
           <Typography
-            variant="h3"
+            variant="h4"
             sx={{
               color: "#FF2A66",
               fontWeight: "bold",
-              textAlign: "right",
+              textAlign: language === "en" ? "left" : "right",
               mb: 3,
             }}
           >
-            {data && data?.data?.terms[0].title[language]}
+            {data && data?.data?.terms?.title[language]}
           </Typography>
 
           <Box
@@ -81,12 +81,12 @@ const TermsOfUse1 = ({ theme, language }) => {
               color: textColor,
               fontSize: "16px",
               lineHeight: "1.8",
-              textAlign: "right",
+              textAlign: language === "en" ? "left" : "right",
               scrollbarWidth: "none",
               "&::-webkit-scrollbar": { display: "none" },
             }}
             dangerouslySetInnerHTML={{
-              __html: data && data?.data?.terms[0].description[language],
+              __html: data && data?.data?.terms?.description[language],
             }} // ✅ عرض HTML بشكل مباشر
           />
 

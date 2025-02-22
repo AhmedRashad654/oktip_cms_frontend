@@ -313,7 +313,7 @@ const Footer = ({ language, darkMode }) => {
                 fontWeight: "400",
                 fontSize: { xs: "14px", md: "16px" },
                 fontFamily: "Tajawal",
-                curor: "pointer",
+                cursor: "pointer",
               }}
             >
               {language === "en" ? "privacy policy" : "سياسة الخصوصية"}

@@ -23,6 +23,7 @@ const AboutUs = ({ theme, language }) => {
     <Box
       sx={{
         width: "100%",
+        minHeight:"100vh",
         backgroundImage: `url(${background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",

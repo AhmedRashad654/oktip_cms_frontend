@@ -29,7 +29,7 @@ const TermsOfUse = ({ theme ,language}) => {
       <Box
         sx={{
           width: "100%",
-          height: "100vh",
+          minHeight: "100vh",
           backgroundImage: "url(../../public/background.jpeg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -44,7 +44,7 @@ const TermsOfUse = ({ theme ,language}) => {
         <Box
           sx={{
             width: "95%",
-            minHeight: "70vh",
+           
             backgroundColor: containerBackgroundColor,
             borderRadius: "15px",
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
@@ -61,7 +61,7 @@ const TermsOfUse = ({ theme ,language}) => {
           </Box>
 
           <Typography
-            variant="h3"
+            variant="h4"
             sx={{
               color: "#FF2A66",
               fontWeight: "bold",

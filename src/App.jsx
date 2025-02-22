@@ -60,19 +60,34 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route
                 path="/APiPage"
-                element={ <APiPage darkMode={ darkMode } language={ language} />}
+                element={<APiPage darkMode={darkMode} language={language} />}
               />
               <Route
                 path="/about-us"
-                element={<AboutUs theme={darkMode ? "dark" : "light"}  language={language}/>}
+                element={
+                  <AboutUs
+                    theme={darkMode ? "dark" : "light"}
+                    language={language}
+                  />
+                }
               />
               <Route
                 path="/privacy-policy"
-                element={<PrivacyPolicy theme={darkMode ? "dark" : "light"} language={language}/>}
+                element={
+                  <PrivacyPolicy
+                    theme={darkMode ? "dark" : "light"}
+                    language={language}
+                  />
+                }
               />
               <Route
                 path="/terms-ofuse"
-                element={<TermsOfUse1 theme={darkMode ? "dark" : "light"} />}
+                element={
+                  <TermsOfUse1
+                    theme={darkMode ? "dark" : "light"}
+                    language={language}
+                  />
+                }
               />
             </Route>
 
@@ -80,9 +95,7 @@ function App() {
             <Route
               path="/dashboard"
               element={
-             
                 <Dashboard darkMode={darkMode} setDarkMode={setDarkMode} />
-             
               }
             />
           </Routes>
