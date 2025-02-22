@@ -3,8 +3,6 @@ import { Box, Typography, Button, Snackbar, Alert } from "@mui/material";
 import { RichTextEditor } from "@mantine/rte"; // ✅ استبدال ReactQuill بـ RichTextEditor من Mantine
 import { axiosInstance } from "../axios/axios";
 
-
-
 const PrivacyPolicyPage = ({ darkMode }) => {
   const [descriptionArabic, setDescriptionArabic] = useState("");
   const [descriptionEnglish, setDescriptionEnglish] = useState("");
@@ -13,9 +11,9 @@ const PrivacyPolicyPage = ({ darkMode }) => {
 
   // ✅ جلب البيانات عند تحميل الصفحة (GET)
   useEffect(() => {
-    axiosInstance.get("/terms-of-use")
+    axiosInstance
+      .get("/privacy-policey")
       .then((response) => {
-        console.log("✅ Data fetched:", response.data);
         if (response.data && response.data.description) {
           setDescriptionArabic(response.data.description.ar || "");
           setDescriptionEnglish(response.data.description.en || "");
@@ -30,7 +28,7 @@ const PrivacyPolicyPage = ({ darkMode }) => {
     setLoading(true);
 
     try {
-      const response = await axiosInstance.patch("/terms-of-use", {
+      const response = await axiosInstance.patch("/privacy-policey", {
         title: {
           ar: "سياسة الخصوصية",
           en: "Privacy Policy",
@@ -41,14 +39,14 @@ const PrivacyPolicyPage = ({ darkMode }) => {
         },
         image: "privacy-image-url",
       });
-
+      alert("تم التعديل بنجاح");
       console.log("✅ Success:", response.data);
 
-      if (response.data.modifiedCount > 0) {
-        setOpenSnackbar(true);
-      } else {
-        alert("⚠️ لم يتم تعديل أي بيانات، تأكد من تغيير المحتوى قبل الحفظ.");
-      }
+      // if (response.data.modifiedCount > 0) {
+      //   setOpenSnackbar(true);
+      // } else {
+      //   alert("⚠️ لم يتم تعديل أي بيانات، تأكد من تغيير المحتوى قبل الحفظ.");
+      // }
     } catch (error) {
       console.error("❌ Error updating terms:", error.response?.data || error);
       alert("❌ فشل التحديث! تحقق من الاتصال بالإنترنت.");
@@ -155,7 +153,8 @@ const PrivacyPolicyPage = ({ darkMode }) => {
           color: "#fff",
           fontWeight: "bold",
           "&:hover": {
-            background: "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
+            background:
+              "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
           },
         }}
         onClick={handleSave}
