@@ -1,4 +1,12 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+{
+  /* <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+        <API />
+        <Typography variant="h6" component="h1">
+          API page / FAQ
+        </Typography>
+      </Box> */
+}
 import {
   Box,
   TextField,
@@ -13,51 +21,185 @@ import {
   DialogTitle,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { toWords } from "number-to-words";
-import API from "./icons/API";
+import { useEffect, useState } from "react";
+import { axiosInstance } from "../axios/axios";
 
 const FAQPage1 = ({ darkMode }) => {
-  const [buttons, setButtons] = useState(["One"]);
-  const [activeButton, setActiveButton] = useState("One");
-  const [faqData, setFaqData] = useState({
-    One: { questionArabic: "", questionEnglish: "", answerArabic: "", answerEnglish: "" },
+  const [buttons, setButtons] = useState([]);
+  // console.log(buttons);
+  const [activeButton, setActiveButton] = useState(false);
+  const [order, setOrder] = useState("");
+  const [faqData, setFaqData] = useState("");
+  const [data, setData] = useState({
+    title: {
+      ar: "",
+      en: "",
+    },
+    description: {
+      ar: "",
+      en: "",
+    },
+    IsViewd: true,
   });
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
+  // console.log(data);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const number = {
+    1: "One",
+    2: "Two",
+    3: "Three",
+    4: "Four",
+    5: "Five",
+    6: "Six",
+    7: "Seven",
+    8: "Eight",
+  };
   const handleActiveButtonChange = (_, newActiveButton) => {
     if (newActiveButton !== null) setActiveButton(newActiveButton);
   };
 
-  const handleAddButton = () => {
-    const nextNumber = buttons.length + 1;
-    const newButtonName = toWords(nextNumber).replace(/^\w/, (c) => c.toUpperCase());
-    setButtons((prevButtons) => [...prevButtons, newButtonName]);
-    setFaqData((prevFaqData) => ({
+  async function fetchAllOrders() {
+    try {
+      const response = await axiosInstance.get("/api-page/faq");
+      setButtons(response.data);
+
+      // }
+    } catch (error) {
+      // emptyRequests++;
+    }
+  }
+  useEffect(() => {
+    fetchAllOrders();
+  }, []);
+
+  function handelSelectedOrder(ord) {
+    setOrder(ord);
+  }
+  function onDeleteWithoutChooseTheQuison() {
+    if (!order) {
+      alert("يرجي اختيار السؤال المراد مسحه");
+      return;
+    }
+  }
+  function restTheFormAfterAddQu() {
+    setData({
+      title: {
+        ar: "عنوان جديد",
+        en: "New Title",
+      },
+      description: {
+        ar: "إجابة جديدة",
+        en: "New Answer",
+      },
+      IsViewd: true,
+    });
+  }
+  const handleDeleteQuestion = async () => {
+    try {
+      const res = await axiosInstance.delete(`/api-page/faq/${order}`);
+      // console.log(res);
+      setOrder("");
+      fetchAllOrders();
+
+      alert("✅ تم حذف السؤال بنجاح!");
+    } catch (error) {
+      alert("❌ فشل في حذف السؤال!");
+    }
+  };
+  const getItemById = async (id) => {
+    try {
+      const res = await axiosInstance.get(`/api-page/faq/${id}`); // Use 'id' here
+      // console.log("Fetched Data:", res.data);
+
+      // Ensure the data structure matches the expected format
+      setData((prevData) => ({
+        ...prevData,
+        title: {
+          ar: res.data?.title?.ar || "",
+          en: res.data?.title?.en || "",
+        },
+        description: {
+          ar: res.data?.description?.ar || "",
+          en: res.data?.description?.en || "",
+        },
+        IsViewd: res.data?.IsViewd ?? true,
+      }));
+    } catch (error) {
+      console.error("Error fetching item:", error);
+    }
+  };
+
+  async function handelEditByOrder() {
+    // console.log(" dsddf" + order);
+    // console.log(order);
+    if (!order) {
+      alert("يرجي اختيار السؤال المراد تعديله");
+    }
+    if (order) {
+      try {
+        const response = await axiosInstance.patch(`/api-page/faq/${order}`, {
+          title: {
+            ar: data.title.ar || "عنوان جديد",
+            en: data.title.en || "New Title",
+          },
+          description: {
+            ar: data.description.ar || "إجابة جديدة",
+            en: data.description.en || "New Answer",
+          },
+        });
+        alert("✅ تم حفظ التعديلات بنجاح!");
+      } catch (error) {}
+    }
+  }
+
+  const handleAddQue = async () => {
+    try {
+      const response = await axiosInstance.post(`/api-page/faq`, {
+        title: {
+          ar: "عنوان جديد",
+          en: "New Title",
+        },
+        description: {
+          ar: "إجابة جديدة",
+          en: "New Answer",
+        },
+        IsViewd: true,
+      });
+      // console.log(response);
+      setActiveButton(false);
+      setOrder("");
+      restTheFormAfterAddQu();
+      fetchAllOrders();
+
+      alert("✅ تم إضافة سؤال جديد بنجاح!");
+    } catch (error) {
+      console.error(`🚫 Error adding new FAQ:`, error);
+
+      if (error.response) {
+        console.error("📌 Server Full Response:", error.response.data);
+        alert(
+          `❌ فشل في إضافة السؤال الجديد! التفاصيل: ${JSON.stringify(
+            error.response.data
+          )}`
+        );
+      }
+    }
+  };
+
+  const handleInputChange = (section, lang, value) => {
+    if (!activeButton) {
+      alert("يرجي اختيار السؤال المراد تعديله");
+      return;
+    }
+    setData((prevFaqData) => ({
       ...prevFaqData,
-      [newButtonName]: { questionArabic: "", questionEnglish: "", answerArabic: "", answerEnglish: "" },
-    }));
-    setActiveButton(newButtonName);
-  };
-
-  const handleInputChange = (field, value) => {
-    setFaqData((prevFaqData) => ({
-      ...prevFaqData,
-      [activeButton]: { ...prevFaqData[activeButton], [field]: value },
+      [section]: {
+        ...prevFaqData[section],
+        [lang]: value,
+      },
     }));
   };
-
-  const handleDeleteQuestion = () => {
-    const newButtons = buttons.filter((btn) => btn !== activeButton);
-    const newFaqData = { ...faqData };
-    delete newFaqData[activeButton];
-
-    setButtons(newButtons);
-    setFaqData(newFaqData);
-    setActiveButton(newButtons[0] || "");
-
-    setOpenDeleteDialog(false);
-  };
-
+  let count = 0;
   return (
     <Box
       sx={{
@@ -68,24 +210,37 @@ const FAQPage1 = ({ darkMode }) => {
         minHeight: "100vh",
       }}
     >
-     <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-            <API  />
-            <Typography variant="h6" component="h1">
-            API page / FAQ
-            </Typography>
-          </Box>
+      <Typography
+        variant="h6"
+        component="h1"
+        sx={{
+          mb: 3,
+          fontWeight: "bold",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Landing Page / FAQ
+      </Typography>
 
       <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 4 }}>
         <ToggleButtonGroup
           value={activeButton}
           exclusive
-          onChange={handleActiveButtonChange}
+          onChange={(_, newValue) => {
+            if (newValue !== null) {
+              setActiveButton(newValue);
+              handelSelectedOrder(newValue); // Set active order
+              getItemById(newValue); // Fetch data for selected order
+            }
+          }}
           sx={{
             "& .MuiToggleButton-root": {
               borderRadius: "8px",
               textTransform: "none",
               fontWeight: "bold",
               p: "10px 20px",
+              m: "1px",
               backgroundColor: darkMode ? "#131D32" : "#f5f5f5",
               color: darkMode ? "#fff" : "#000",
               "&.Mui-selected": {
@@ -95,15 +250,21 @@ const FAQPage1 = ({ darkMode }) => {
             },
           }}
         >
-          {buttons.map((buttonName) => (
-            <ToggleButton key={buttonName} value={buttonName}>
-              {buttonName}
-            </ToggleButton>
-          ))}
+          {buttons.map((button) => {
+            count++;
+            return (
+              <>
+                <ToggleButton key={button.order} value={button.order}>
+                  {number[count]}
+                </ToggleButton>
+              </>
+            );
+          })}
         </ToggleButtonGroup>
         <Button
+          disabled={buttons.length === 8}
           variant="outlined"
-          onClick={handleAddButton}
+          onClick={handleAddQue}
           sx={{
             borderRadius: "8px",
             fontWeight: "bold",
@@ -134,8 +295,8 @@ const FAQPage1 = ({ darkMode }) => {
           placeholder="اكتب هنا"
           multiline
           rows={2}
-          value={faqData[activeButton]?.questionArabic || ""}
-          onChange={(e) => handleInputChange("questionArabic", e.target.value)}
+          value={data.title.ar}
+          onChange={(e) => handleInputChange("title", "ar", e.target.value)}
           InputProps={{
             style: { color: darkMode ? "#fff" : "#000" },
           }}
@@ -152,8 +313,8 @@ const FAQPage1 = ({ darkMode }) => {
           placeholder="Write here"
           multiline
           rows={2}
-          value={faqData[activeButton]?.questionEnglish || ""}
-          onChange={(e) => handleInputChange("questionEnglish", e.target.value)}
+          value={data.title.en}
+          onChange={(e) => handleInputChange("title", "en", e.target.value)}
           InputProps={{
             style: { color: darkMode ? "#fff" : "#000" },
           }}
@@ -170,8 +331,10 @@ const FAQPage1 = ({ darkMode }) => {
           placeholder="اكتب هنا"
           multiline
           rows={6}
-          value={faqData[activeButton]?.answerArabic || ""}
-          onChange={(e) => handleInputChange("answerArabic", e.target.value)}
+          value={data.description.ar}
+          onChange={(e) =>
+            handleInputChange("description", "ar", e.target.value)
+          }
           InputProps={{
             style: { color: darkMode ? "#fff" : "#000" },
           }}
@@ -188,8 +351,10 @@ const FAQPage1 = ({ darkMode }) => {
           placeholder="Write here"
           multiline
           rows={6}
-          value={faqData[activeButton]?.answerEnglish || ""}
-          onChange={(e) => handleInputChange("answerEnglish", e.target.value)}
+          value={data.description.en}
+          onChange={(e) =>
+            handleInputChange("description", "en", e.target.value)
+          }
           InputProps={{
             style: { color: darkMode ? "#fff" : "#000" },
           }}
@@ -203,25 +368,40 @@ const FAQPage1 = ({ darkMode }) => {
         />
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Button
+          onClick={handelEditByOrder}
           variant="contained"
           sx={{
             borderRadius: "12px",
             padding: "10px 20px",
-            background: "linear-gradient(238deg, #E9BA00 -48.58%, #FF2A66 59.6%)",
+            background:
+              "linear-gradient(238deg, #E9BA00 -48.58%, #FF2A66 59.6%)",
             color: "#fff",
             fontWeight: "bold",
             "&:hover": {
-              background: "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
+              background:
+                "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
             },
           }}
-          onClick={() => console.log(faqData)}
         >
           Save Changes
         </Button>
         <Button
-          onClick={() => setOpenDeleteDialog(true)}
+          onClick={() => {
+            if (!order) {
+              onDeleteWithoutChooseTheQuison();
+            } else {
+              setOpenDeleteDialog(true);
+            }
+          }}
+          // onClick={handleDeleteQuestion}
           startIcon={<DeleteIcon sx={{ color: "#FF2A66" }} />}
           sx={{
             backgroundColor: darkMode ? "#131D32" : "#f5f5f5",
@@ -238,74 +418,76 @@ const FAQPage1 = ({ darkMode }) => {
       </Box>
 
       <Dialog
-  open={openDeleteDialog}
-  onClose={() => setOpenDeleteDialog(false)}
-  PaperProps={{
-    style: {
-      backgroundColor: darkMode ? "#050A17" : "#fff",
-      color: darkMode ? "#fff" : "#000",
-      borderRadius: "24px", // جعل الحواف دائرية
-      width: "400px", // جعل العرض صغيرًا مثل مربع
-      padding: "20px",
-    },
-  }}
->
-  <DialogTitle
-    sx={{
-      color: "#FF2A66",
-      fontWeight: "bold",
-      fontSize: "1.5rem",
-      textAlign: "center", // توسيط النص
-    }}
-  >
-    Delete Question
-  </DialogTitle>
-  <DialogContent>
-    <DialogContentText
-      sx={{
-        fontSize: "1.2rem",
-        color: darkMode ? "#ccc" : "#333",
-        textAlign: "center", // توسيط النص
-      }}
-    >
-      Are you sure you want to Log Out?
-    </DialogContentText>
-  </DialogContent>
-  <DialogActions
-    sx={{
-      display: "flex",
-      justifyContent: "center", // توسيط الأزرار
-      gap: 2,
-      mt: 2,
-    }}
-  >
-    <Button
-      onClick={() => setOpenDeleteDialog(false)}
-      sx={{
-        background: "linear-gradient(238deg, #E9BA00, #FF2A66)",
-        color: "#fff",
-        fontWeight: "bold",
-        borderRadius: "24px", // حواف دائرية
-        padding: "8px 20px",
-      }}
-    >
-      Cancel
-    </Button>
-    <Button
-      onClick={handleDeleteQuestion}
-      sx={{
-        backgroundColor: darkMode ? "#131D32" : "#f5f5f5",
-        color: darkMode ? "#FF2A66" : "#000",
-        fontWeight: "bold",
-        borderRadius: "24px", // حواف دائرية
-        padding: "8px 20px",
-      }}
-    >
-      Log Out
-    </Button>
-  </DialogActions>
-</Dialog>
-
+        open={openDeleteDialog}
+        onClose={() => setOpenDeleteDialog(false)}
+        PaperProps={{
+          style: {
+            backgroundColor: darkMode ? "#050A17" : "#fff",
+            color: darkMode ? "#fff" : "#000",
+            borderRadius: "24px", // جعل الحواف دائرية
+            width: "400px", // جعل العرض صغيرًا مثل مربع
+            padding: "20px",
+          },
+        }}
+      >
+        <DialogTitle
+          sx={{
+            color: "#FF2A66",
+            fontWeight: "bold",
+            fontSize: "1.5rem",
+            textAlign: "center", // توسيط النص
+          }}
+        >
+          Delete Question
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText
+            sx={{
+              fontSize: "1.2rem",
+              color: darkMode ? "#ccc" : "#333",
+              textAlign: "center", // توسيط النص
+            }}
+          >
+            Are you sure you want to Delete?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions
+          sx={{
+            display: "flex",
+            justifyContent: "center", // توسيط الأزرار
+            gap: 2,
+            mt: 2,
+          }}
+        >
+          <Button
+            onClick={() => setOpenDeleteDialog(false)}
+            sx={{
+              background: "linear-gradient(238deg, #E9BA00, #FF2A66)",
+              color: "#fff",
+              fontWeight: "bold",
+              borderRadius: "24px", // حواف دائرية
+              padding: "8px 20px",
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              setOpenDeleteDialog(false);
+              handleDeleteQuestion();
+            }}
+            sx={{
+              backgroundColor: darkMode ? "#131D32" : "#f5f5f5",
+              color: darkMode ? "#FF2A66" : "#000",
+              fontWeight: "bold",
+              borderRadius: "24px", // حواف دائرية
+              padding: "8px 20px",
+            }}
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
