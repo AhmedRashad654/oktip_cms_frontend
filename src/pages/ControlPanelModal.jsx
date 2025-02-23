@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Modal,
   Box,
@@ -11,8 +11,7 @@ import {
 import Logo from "./icons/Logo";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { url } from "../axios/axios";
-import axios from "axios";
+import { axiosInstance, url } from "../axios/axios";
 import { useNavigate } from "react-router-dom";
 
 const ControlPanelModal = ({ isOpen, handleClose, theme }) => {
@@ -39,11 +38,10 @@ const ControlPanelModal = ({ isOpen, handleClose, theme }) => {
     if (!password) return alert("Password is required");
 
     try {
-      const response = await axios.post(
-        `${url}/auth/signin`,
-        { email, password },
-        { headers: { "x-app-token": "OKPIN" } }
-      );
+      const response = await axiosInstance.post(`${url}/auth/signin`, {
+        email,
+        password,
+      });
       alert("Hello, Login Successful!");
       localStorage.setItem("tokenOktpn", response?.data?.data);
       navigate("/dashboard");

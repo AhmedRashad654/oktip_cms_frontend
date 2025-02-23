@@ -24,7 +24,6 @@ const TermsOfUse1 = ({ theme, language }) => {
     queryKey: ["getTrumsUserPage", language],
     queryFn: getTrumsUserPage,
   });
-  console.log("alaa", data);
   return (
     <>
       <Backdrop sx={{ color: "#fff", zIndex: 1201 }} open={isLoading}>
@@ -86,8 +85,13 @@ const TermsOfUse1 = ({ theme, language }) => {
               "&::-webkit-scrollbar": { display: "none" },
             }}
             dangerouslySetInnerHTML={{
-              __html: data && data?.data?.terms?.description[language],
-            }} // ✅ عرض HTML بشكل مباشر
+              __html:
+                data &&
+                data?.data?.terms?.description[language]?.replace(
+                  /(\d+\.)\s*/g,
+                  "<br /><br /> "
+                ),
+            }}
           />
 
           <Box
