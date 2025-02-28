@@ -7,6 +7,7 @@ import Telegram from './icons/Telegram';
 import Logo from './icons/Logo';
 import { axiosInstance } from '../axios/axios';
 import { useQuery } from '@tanstack/react-query';
+import background from "../../public/background.jpeg";
 const TermsOfUse = ({ theme ,language}) => {
 
   const containerBackgroundColor = theme === 'dark' ? '#00040F' : '#FFFFFF';
@@ -30,7 +31,7 @@ const TermsOfUse = ({ theme ,language}) => {
         sx={{
           width: "100%",
           minHeight: "100vh",
-          backgroundImage: "url(../../public/background.jpeg)",
+          backgroundImage: `url(${background})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -44,7 +45,7 @@ const TermsOfUse = ({ theme ,language}) => {
         <Box
           sx={{
             width: "95%",
-           
+
             backgroundColor: containerBackgroundColor,
             borderRadius: "15px",
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",

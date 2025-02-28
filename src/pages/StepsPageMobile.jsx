@@ -8,7 +8,7 @@ const StepsPageMobile = ({ darkMode, step, language }) => {
       sx={{
         backgroundColor: darkMode
           ? "#050A17"
-          : theme.palette.background.default, 
+          : theme.palette.background.default,
         color: theme.palette.text.primary,
         minHeight: "100vh",
         flexDirection: "column",
@@ -28,7 +28,9 @@ const StepsPageMobile = ({ darkMode, step, language }) => {
           flexGrow: 1,
         }}
       >
-        ابدأ مع Okpin في 4 خطوات سهلة
+        {language === "en"
+          ? "start in 4 simple steps with OKpin"
+          : "ابدأ مع Okpin في 4 خطوات سهلة"}
       </Typography>
       {/* العنوان الرئيسي */}
       <Box
@@ -36,21 +38,23 @@ const StepsPageMobile = ({ darkMode, step, language }) => {
           display: "flex",
           alignItems: "center",
           flexWrap: "wrap",
-          justifyContent:"center",
+          justifyContent: "center",
           gap: "30px",
           width: "100%",
-          padding:"10px"
+          padding: "10px",
         }}
       >
-        {step && step?.map( ( step, index ) => (
-           <StepCircle
-          step={step}
-          position={index %2 === 0?"left":"right"} 
-          darkMode={darkMode}
-          number={index}
-          language={language}
-        />
-        ))}
+        {step &&
+          step?.map((step, index) => (
+            <StepCircle
+              key={index}
+              step={step}
+              position={index % 2 === 0 ? "left" : "right"}
+              darkMode={darkMode}
+              number={index}
+              language={language}
+            />
+          ))}
       </Box>
     </Box>
   );
@@ -67,8 +71,6 @@ const StepCircle = ({ step, position, number, darkMode, language }) => {
   const borderColor = colors[number] || "var(--primary-yellow, #E9BA00)";
   const circleColor = colors[number] || "#E9BA00";
 
- 
-
   return (
     <Box
       sx={{
@@ -77,7 +79,6 @@ const StepCircle = ({ step, position, number, darkMode, language }) => {
         alignItems: "center",
         width: "300px",
         position: "relative",
-        
       }}
     >
       {/* الخلفية الخاصة بالأرقام (دائرة كبيرة) */}
@@ -86,15 +87,14 @@ const StepCircle = ({ step, position, number, darkMode, language }) => {
           position: "absolute",
           width: "70px",
           left: number % 2 === 0 ? "-20px" : "",
-          right:number %2 !==0 ?"-20px":"",
-          
-          top:"-20px" ,
+          right: number % 2 !== 0 ? "-20px" : "",
+
+          top: "-20px",
           height: "70px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           flexShrink: 0,
-         
         }}
       >
         <svg
@@ -107,7 +107,6 @@ const StepCircle = ({ step, position, number, darkMode, language }) => {
           <circle cx="52.4717" cy="52.4717" r="51.5283" fill={circleColor} />
         </svg>
 
-     
         <Box
           sx={{
             position: "absolute",
@@ -126,8 +125,8 @@ const StepCircle = ({ step, position, number, darkMode, language }) => {
           display: "flex",
           flexWrap: "wrap", // ✅ السماح بتقسيم الكروت إلى سطرين في الشاشات الصغيرة
           justifyContent: "center", // ✅ توزيع الكروت بشكل متساوٍ
-             width: "100%",
-            height: "300px",
+          width: "100%",
+          height: "300px",
         }}
       >
         <Paper
@@ -141,12 +140,12 @@ const StepCircle = ({ step, position, number, darkMode, language }) => {
             backdropFilter: "blur(40px)",
             textAlign: "center",
             lineHeight: "1.5",
-               width: "100%",
+            width: "100%",
             height: "300px",
-      
+
             top: "65px",
             left: position === "left" ? "-140px" : "40px",
-            
+
             zIndex: 3,
             padding: "10px",
             display: "flex",
@@ -154,8 +153,6 @@ const StepCircle = ({ step, position, number, darkMode, language }) => {
             alignItems: "center",
             justifyContent: "center",
             whiteSpace: "pre-wrap",
-
-       
           }}
         >
           <Typography variant="h6">{step?.title[language]}</Typography>

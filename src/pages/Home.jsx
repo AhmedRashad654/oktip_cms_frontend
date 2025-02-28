@@ -46,7 +46,7 @@ function Home({ darkMode, language }) {
           textAlign: "center",
 
           height: isMobile ? "auto" : "100vh",
-          padding: "20px",
+          padding: {md: "20px"},
           paddingTop: isMobile ? "100px" : "60px",
           color: "#ffffff",
           position: "relative",
@@ -155,7 +155,7 @@ function Home({ darkMode, language }) {
             wordWrap: "break-word",
             color: theme.palette.mode === "dark" ? "white" : "black",
             fontFamily: "Tajawal, sans-serif",
-            fontWeight: 700,
+
           }}
         >
           {data?.data?.header?.title[language]}

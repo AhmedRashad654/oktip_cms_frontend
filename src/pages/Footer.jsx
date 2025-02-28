@@ -98,7 +98,6 @@ const Footer = ({ language, darkMode }) => {
                 flexDirection: "column", // ترتيب النصوص بشكل عمودي
                 borderRadius: "5px",
               }}
-              href="#"
             >
               <Typography
                 variant="caption"
@@ -311,7 +310,7 @@ const Footer = ({ language, darkMode }) => {
               sx={{
                 marginBottom: "8px",
                 fontWeight: "400",
-                fontSize: { xs: "14px", md: "16px" },
+                fontSize: { xs: "12px", md: "16px" },
                 fontFamily: "Tajawal",
                 cursor: "pointer",
               }}
@@ -380,7 +379,7 @@ const Footer = ({ language, darkMode }) => {
             sx={{
               marginBottom: "16px",
               fontWeight: "700",
-              fontSize: { xs: "14px", md: "16px" },
+              fontSize: { xs: "12px", md: "16px" },
               fontFamily: "Tajawal",
             }}
           >
@@ -388,7 +387,10 @@ const Footer = ({ language, darkMode }) => {
           </Typography>
           <Box>
             <Link
-              href="#"
+              onClick={() => {
+                navigate("/");
+                scrollTo(0, 0);
+              }}
               color="inherit"
               underline="none"
               display="block"
@@ -397,12 +399,12 @@ const Footer = ({ language, darkMode }) => {
                 fontWeight: "400",
                 fontSize: { xs: "14px", md: "16px" },
                 fontFamily: "Tajawal",
+                cursor: "pointer",
               }}
             >
               {language === "en" ? "Home" : "الرئيسية"}
             </Link>
             <Link
-              href="#"
               color="inherit"
               underline="none"
               display="block"
@@ -416,7 +418,6 @@ const Footer = ({ language, darkMode }) => {
               {language === "en" ? "Why Us" : "لماذا نحن"}
             </Link>
             <Link
-              href="#"
               color="inherit"
               underline="none"
               display="block"
@@ -432,7 +433,6 @@ const Footer = ({ language, darkMode }) => {
                 : "الأسئلة الشائعة FAQ"}
             </Link>
             <Link
-              href="#"
               color="inherit"
               underline="none"
               display="block"
@@ -473,14 +473,3 @@ const Footer = ({ language, darkMode }) => {
 };
 
 export default Footer;
-
-
-
-
-
-
-
-
-
-
-
