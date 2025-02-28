@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from "react";
-
-import { Box, TextField, Button, Typography, Snackbar, Alert } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { axiosInstance } from "../axios/axios";
 
-
-
 const WhyOKPinAPI = ({ darkMode }) => {
-  // ✅ الحالة الخاصة بالبطاقات
-  const [activeCard, setActiveCard] = useState(1); // يبدأ بـ First Card (order = 1)
+  const [activeCard, setActiveCard] = useState(1); // Starts with First Card (order = 1)
 
-  // ✅ حالة البيانات المستلمة من API
   const [formData, setFormData] = useState({
     titleAr: "",
     titleEn: "",
     descriptionAr: "",
     descriptionEn: "",
-    image: "", // دعم الصورة
+    image: "",
   });
 
-  // ✅ حالة التوستر (Snackbar) للنجاح أو الفشل
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
     severity: "success",
   });
 
-  // ✅ جلب البيانات عند تحميل الصفحة أو تغيير البطاقة
   useEffect(() => {
     axiosInstance
       .get(`/api-page/why-ok/${activeCard}`)
@@ -37,7 +37,7 @@ const WhyOKPinAPI = ({ darkMode }) => {
             titleEn: response.data.title.en || "",
             descriptionAr: response.data.description.ar || "",
             descriptionEn: response.data.description.en || "",
-            image: response.data.image || "", // حفظ الصورة إن وجدت
+            image: response.data.image || "",
           });
         }
       })
@@ -51,20 +51,24 @@ const WhyOKPinAPI = ({ darkMode }) => {
       });
   }, [activeCard]);
 
-  // ✅ تحديث البيانات عند إدخال المستخدم
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // ✅ إرسال البيانات عند الضغط على "Save Changes"
   const handleSave = async () => {
     try {
-      const response = await axiosInstance.patch(`/api-page/why-ok/${activeCard}`, {
-        title: { ar: formData.titleAr, en: formData.titleEn },
-        description: { ar: formData.descriptionAr, en: formData.descriptionEn },
-        image: formData.image, // إرسال الصورة الحالية
-      });
+      const response = await axiosInstance.patch(
+        `/api-page/why-ok/${activeCard}`,
+        {
+          title: { ar: formData.titleAr, en: formData.titleEn },
+          description: {
+            ar: formData.descriptionAr,
+            en: formData.descriptionEn,
+          },
+          image: formData.image,
+        }
+      );
 
       console.log("✅ Success:", response.data);
       setSnackbar({
@@ -82,7 +86,6 @@ const WhyOKPinAPI = ({ darkMode }) => {
     }
   };
 
-  // ✅ إغلاق `Snackbar`
   const handleCloseSnackbar = () => {
     setSnackbar({ ...snackbar, open: false });
   };
@@ -96,7 +99,7 @@ const WhyOKPinAPI = ({ darkMode }) => {
         borderRadius: "12px",
       }}
     >
-      {/* ✅ العنوان مع الأيقونة */}
+      {/* Title and Icon */}
       <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
         <HomeIcon sx={{ color: "#FF2A66", fontSize: "24px", mr: 1 }} />
         <Typography variant="h6" component="h1">
@@ -104,8 +107,16 @@ const WhyOKPinAPI = ({ darkMode }) => {
         </Typography>
       </Box>
 
-      {/* ✅ الأزرار لاختيار البطاقة */}
-      <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
+      {/* Buttons to select card */}
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+          mb: 3,
+          flexWrap: "wrap", // Allows buttons to wrap on smaller screens
+          justifyContent: "center", // Centers buttons
+        }}
+      >
         {[1, 2, 3, 4].map((order) => (
           <Button
             key={order}
@@ -137,7 +148,7 @@ const WhyOKPinAPI = ({ darkMode }) => {
         ))}
       </Box>
 
-      {/* ✅ الحقول */}
+      {/* Fields */}
       <Box
         sx={{
           display: "grid",
@@ -146,13 +157,45 @@ const WhyOKPinAPI = ({ darkMode }) => {
           mb: 3,
         }}
       >
-        <TextField label="Title (Arabic)" name="titleAr" value={formData.titleAr} onChange={handleChange} multiline rows={3} />
-        <TextField label="Title (English)" name="titleEn" value={formData.titleEn} onChange={handleChange} multiline rows={3} />
-        <TextField label="Description (Arabic)" name="descriptionAr" value={formData.descriptionAr} onChange={handleChange} multiline rows={5} />
-        <TextField label="Description (English)" name="descriptionEn" value={formData.descriptionEn} onChange={handleChange} multiline rows={5} />
+        <TextField
+          label="Title (Arabic)"
+          name="titleAr"
+          value={formData.titleAr}
+          onChange={handleChange}
+          multiline
+          rows={3}
+          fullWidth
+        />
+        <TextField
+          label="Title (English)"
+          name="titleEn"
+          value={formData.titleEn}
+          onChange={handleChange}
+          multiline
+          rows={3}
+          fullWidth
+        />
+        <TextField
+          label="Description (Arabic)"
+          name="descriptionAr"
+          value={formData.descriptionAr}
+          onChange={handleChange}
+          multiline
+          rows={5}
+          fullWidth
+        />
+        <TextField
+          label="Description (English)"
+          name="descriptionEn"
+          value={formData.descriptionEn}
+          onChange={handleChange}
+          multiline
+          rows={5}
+          fullWidth
+        />
       </Box>
 
-      {/* ✅ زر الحفظ */}
+      {/* Save Changes Button */}
       <Button
         onClick={handleSave}
         variant="contained"
@@ -163,15 +206,20 @@ const WhyOKPinAPI = ({ darkMode }) => {
           color: "#fff",
           fontWeight: "bold",
           "&:hover": {
-            background: "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
+            background:
+              "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
           },
         }}
       >
         Save Changes
       </Button>
 
-      {/* ✅ Snackbar لإظهار نجاح أو فشل العملية */}
-      <Snackbar open={snackbar.open} autoHideDuration={3000} onClose={handleCloseSnackbar}>
+      {/* Snackbar to show success or error */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
         <Alert onClose={handleCloseSnackbar} severity={snackbar.severity}>
           {snackbar.message}
         </Alert>

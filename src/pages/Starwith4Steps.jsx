@@ -3,14 +3,33 @@ import { Box, TextField, Button, Typography } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { axiosInstance } from "../axios/axios";
 
-
 function Starwith4Steps({ darkMode }) {
   const [activeCard, setActiveCard] = useState("First Card");
   const [formData, setFormData] = useState({
-    "First Card": { titleAr: "", titleEn: "", descriptionAr: "", descriptionEn: "" },
-    "Second Card": { titleAr: "", titleEn: "", descriptionAr: "", descriptionEn: "" },
-    "Third Card": { titleAr: "", titleEn: "", descriptionAr: "", descriptionEn: "" },
-    "Fourth Card": { titleAr: "", titleEn: "", descriptionAr: "", descriptionEn: "" },
+    "First Card": {
+      titleAr: "",
+      titleEn: "",
+      descriptionAr: "",
+      descriptionEn: "",
+    },
+    "Second Card": {
+      titleAr: "",
+      titleEn: "",
+      descriptionAr: "",
+      descriptionEn: "",
+    },
+    "Third Card": {
+      titleAr: "",
+      titleEn: "",
+      descriptionAr: "",
+      descriptionEn: "",
+    },
+    "Fourth Card": {
+      titleAr: "",
+      titleEn: "",
+      descriptionAr: "",
+      descriptionEn: "",
+    },
   });
 
   const cardOrderMapping = {
@@ -20,7 +39,6 @@ function Starwith4Steps({ darkMode }) {
     "Fourth Card": 4,
   };
 
-  // ✅ **جلب البيانات عند تحميل الصفحة**
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,7 +68,6 @@ function Starwith4Steps({ darkMode }) {
     fetchData();
   }, []);
 
-  // ✅ **تحديث البيانات عند التعديل**
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -59,7 +76,6 @@ function Starwith4Steps({ darkMode }) {
     });
   };
 
-  // ✅ **حفظ البيانات عبر `PATCH`**
   const handleSave = async () => {
     try {
       const order = cardOrderMapping[activeCard];
@@ -91,7 +107,6 @@ function Starwith4Steps({ darkMode }) {
         borderRadius: "12px",
       }}
     >
-      {/* العنوان مع الأيقونة */}
       <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
         <HomeIcon sx={{ color: "#FF2A66", fontSize: "24px", mr: 1 }} />
         <Typography variant="h6" component="h1">
@@ -99,46 +114,49 @@ function Starwith4Steps({ darkMode }) {
         </Typography>
       </Box>
 
-      {/* الأزرار */}
       <Box
         sx={{
           display: "flex",
           gap: 2,
           mb: 3,
+          flexWrap: "wrap", // Make the buttons wrap on smaller screens
         }}
       >
-        {["First Card", "Second Card", "Third Card", "Fourth Card"].map((card) => (
-          <Button
-            key={card}
-            onClick={() => setActiveCard(card)}
-            sx={{
-              borderRadius: "8px",
-              background:
-                activeCard === card
-                  ? "var(--primary-purple, #9022FF)"
-                  : darkMode
-                  ? "#131D32"
-                  : "#f5f5f5",
-              color: activeCard === card ? "#fff" : darkMode ? "#fff" : "#000",
-              fontWeight: "bold",
-              padding: "10px 20px",
-              textTransform: "none",
-              "&:hover": {
+        {["First Card", "Second Card", "Third Card", "Fourth Card"].map(
+          (card) => (
+            <Button
+              key={card}
+              onClick={() => setActiveCard(card)}
+              sx={{
+                borderRadius: "8px",
                 background:
                   activeCard === card
                     ? "var(--primary-purple, #9022FF)"
                     : darkMode
-                    ? "#1E2A40"
-                    : "#e0e0e0",
-              },
-            }}
-          >
-            {card}
-          </Button>
-        ))}
+                    ? "#131D32"
+                    : "#f5f5f5",
+                color:
+                  activeCard === card ? "#fff" : darkMode ? "#fff" : "#000",
+                fontWeight: "bold",
+                padding: "10px 20px",
+                textTransform: "none",
+                "&:hover": {
+                  background:
+                    activeCard === card
+                      ? "var(--primary-purple, #9022FF)"
+                      : darkMode
+                      ? "#1E2A40"
+                      : "#e0e0e0",
+                },
+              }}
+            >
+              {card}
+            </Button>
+          )
+        )}
       </Box>
 
-      {/* الحقول الخاصة بالزر النشط فقط */}
+      {/* Fields for active card only */}
       <Box
         sx={{
           display: "grid",
@@ -155,10 +173,14 @@ function Starwith4Steps({ darkMode }) {
           name="titleAr"
           value={formData[activeCard]?.titleAr || ""}
           onChange={handleChange}
-          sx={ { backgroundColor: darkMode ? "#131D32" : "#f5f5f5", borderRadius: "12px" } }
-                      InputProps={{
-    style: { color: darkMode?"white":"black" }
-  }}
+          sx={{
+            backgroundColor: darkMode ? "#131D32" : "#f5f5f5",
+            borderRadius: "12px",
+          }}
+          InputProps={{
+            style: { color: darkMode ? "white" : "black" },
+          }}
+          fullWidth
         />
         <TextField
           label="Title (English)"
@@ -168,10 +190,14 @@ function Starwith4Steps({ darkMode }) {
           name="titleEn"
           value={formData[activeCard]?.titleEn || ""}
           onChange={handleChange}
-          sx={ { backgroundColor: darkMode ? "#131D32" : "#f5f5f5", borderRadius: "12px" } }
-                      InputProps={{
-    style: { color: darkMode?"white":"black" }
-  }}
+          sx={{
+            backgroundColor: darkMode ? "#131D32" : "#f5f5f5",
+            borderRadius: "12px",
+          }}
+          InputProps={{
+            style: { color: darkMode ? "white" : "black" },
+          }}
+          fullWidth
         />
         <TextField
           label="Description (Arabic)"
@@ -181,10 +207,14 @@ function Starwith4Steps({ darkMode }) {
           name="descriptionAr"
           value={formData[activeCard]?.descriptionAr || ""}
           onChange={handleChange}
-          sx={ { backgroundColor: darkMode ? "#131D32" : "#f5f5f5", borderRadius: "12px" } }
-            InputProps={{
-    style: { color: darkMode?"white":"black" }
-  }}
+          sx={{
+            backgroundColor: darkMode ? "#131D32" : "#f5f5f5",
+            borderRadius: "12px",
+          }}
+          InputProps={{
+            style: { color: darkMode ? "white" : "black" },
+          }}
+          fullWidth
         />
         <TextField
           label="Description (English)"
@@ -194,14 +224,17 @@ function Starwith4Steps({ darkMode }) {
           name="descriptionEn"
           value={formData[activeCard]?.descriptionEn || ""}
           onChange={handleChange}
-          sx={ { backgroundColor: darkMode ? "#131D32" : "#f5f5f5", borderRadius: "12px" } }
-                      InputProps={{
-    style: { color: darkMode?"white":"black" }
-  }}
+          sx={{
+            backgroundColor: darkMode ? "#131D32" : "#f5f5f5",
+            borderRadius: "12px",
+          }}
+          InputProps={{
+            style: { color: darkMode ? "white" : "black" },
+          }}
+          fullWidth
         />
       </Box>
 
-      {/* زر الحفظ */}
       <Button
         onClick={handleSave}
         variant="contained"
@@ -212,8 +245,10 @@ function Starwith4Steps({ darkMode }) {
           color: "#fff",
           fontWeight: "bold",
           "&:hover": {
-            background: "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
+            background:
+              "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
           },
+          width: { xs: "100%", sm: "auto" }, // Make the button full-width on small screens
         }}
       >
         Save Changes

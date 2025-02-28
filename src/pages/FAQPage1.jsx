@@ -23,6 +23,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../axios/axios";
+import API from "./icons/API";
 
 const FAQPage1 = ({ darkMode }) => {
   const [buttons, setButtons] = useState([]);
@@ -137,16 +138,19 @@ const FAQPage1 = ({ darkMode }) => {
     }
     if (order) {
       try {
-        const response = await axiosInstance.patch(`/api-page/faq/${order}`, {
-          title: {
-            ar: data.title.ar || "عنوان جديد",
-            en: data.title.en || "New Title",
-          },
-          description: {
-            ar: data.description.ar || "إجابة جديدة",
-            en: data.description.en || "New Answer",
-          },
-        });
+        const response = await axiosInstance.patch(
+          `/landing-page/faq/${order}`,
+          {
+            title: {
+              ar: data.title.ar || "عنوان جديد",
+              en: data.title.en || "New Title",
+            },
+            description: {
+              ar: data.description.ar || "إجابة جديدة",
+              en: data.description.en || "New Answer",
+            },
+          }
+        );
         alert("✅ تم حفظ التعديلات بنجاح!");
       } catch (error) {}
     }
@@ -210,10 +214,11 @@ const FAQPage1 = ({ darkMode }) => {
         minHeight: "100vh",
       }}
     >
-      <Typography
+      {/* <Typography
         variant="h6"
         component="h1"
         sx={{
+          mt: 3,
           mb: 3,
           fontWeight: "bold",
           display: "flex",
@@ -221,9 +226,25 @@ const FAQPage1 = ({ darkMode }) => {
         }}
       >
         Landing Page / FAQ
-      </Typography>
+      </Typography> */}
 
-      <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 4 }}>
+      <Box sx={{ display: "flex", alignItems: "center", mb: 3, pt: 4 }}>
+        <API />
+        <Typography variant="h6" component="h1">
+          API page / FAQ
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: { xs: "center", sm: "flex-start" }, // Center on small screens
+          gap: 2,
+          mb: 4,
+        }}
+      >
         <ToggleButtonGroup
           value={activeButton}
           exclusive
@@ -235,6 +256,9 @@ const FAQPage1 = ({ darkMode }) => {
             }
           }}
           sx={{
+            display: "flex",
+            flexWrap: "wrap", // Ensures buttons wrap on smaller screens
+            justifyContent: { xs: "center", sm: "flex-start" }, // Center-align on small screens
             "& .MuiToggleButton-root": {
               borderRadius: "8px",
               textTransform: "none",
@@ -250,17 +274,13 @@ const FAQPage1 = ({ darkMode }) => {
             },
           }}
         >
-          {buttons.map((button) => {
-            count++;
-            return (
-              <>
-                <ToggleButton key={button.order} value={button.order}>
-                  {number[count]}
-                </ToggleButton>
-              </>
-            );
-          })}
+          {buttons.map((button, index) => (
+            <ToggleButton key={button.order} value={button.order}>
+              {number[index + 1]}
+            </ToggleButton>
+          ))}
         </ToggleButtonGroup>
+
         <Button
           disabled={buttons.length === 8}
           variant="outlined"
@@ -380,11 +400,12 @@ const FAQPage1 = ({ darkMode }) => {
           variant="contained"
           sx={{
             borderRadius: "12px",
-            padding: "10px 20px",
+            padding: { xs: "8px 16px", sm: "10px 20px" }, // Adjust padding on smaller screens
             background:
               "linear-gradient(238deg, #E9BA00 -48.58%, #FF2A66 59.6%)",
             color: "#fff",
             fontWeight: "bold",
+            fontSize: { xs: "14px", sm: "16px" }, // Adjust font size on smaller screens
             "&:hover": {
               background:
                 "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
@@ -393,6 +414,7 @@ const FAQPage1 = ({ darkMode }) => {
         >
           Save Changes
         </Button>
+
         <Button
           onClick={() => {
             if (!order) {

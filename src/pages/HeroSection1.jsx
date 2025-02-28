@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Box, TextField, Button, Typography, Snackbar, Alert } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { axiosInstance } from "../axios/axios";
-
 
 const HeroSection1 = ({ darkMode }) => {
   // ✅ حفظ البيانات القادمة من الـ API
@@ -106,6 +112,14 @@ const HeroSection1 = ({ darkMode }) => {
         }}
       >
         <TextField
+          InputProps={{
+            style: {
+              color: darkMode ? "#fff" : "#000",
+              fontSize: "18px",
+              fontWeight: "bold",
+            },
+          }}
+          InputLabelProps={{ style: { color: darkMode ? "#fff" : "#000" } }}
           label="Title (Arabic)"
           name="titleAr"
           value={formData.titleAr}
@@ -119,6 +133,14 @@ const HeroSection1 = ({ darkMode }) => {
           }}
         />
         <TextField
+          InputProps={{
+            style: {
+              color: darkMode ? "#fff" : "#000",
+              fontSize: "18px",
+              fontWeight: "bold",
+            },
+          }}
+          InputLabelProps={{ style: { color: darkMode ? "#fff" : "#000" } }}
           label="Title (English)"
           name="titleEn"
           value={formData.titleEn}
@@ -132,6 +154,14 @@ const HeroSection1 = ({ darkMode }) => {
           }}
         />
         <TextField
+          InputProps={{
+            style: {
+              color: darkMode ? "#fff" : "#000",
+              fontSize: "18px",
+              fontWeight: "bold",
+            },
+          }}
+          InputLabelProps={{ style: { color: darkMode ? "#fff" : "#000" } }}
           label="Description (Arabic)"
           name="descriptionAr"
           value={formData.descriptionAr}
@@ -145,6 +175,14 @@ const HeroSection1 = ({ darkMode }) => {
           }}
         />
         <TextField
+          InputProps={{
+            style: {
+              color: darkMode ? "#fff" : "#000",
+              fontSize: "18px",
+              fontWeight: "bold",
+            },
+          }}
+          InputLabelProps={{ style: { color: darkMode ? "#fff" : "#000" } }}
           label="Description (English)"
           name="descriptionEn"
           value={formData.descriptionEn}
@@ -170,7 +208,8 @@ const HeroSection1 = ({ darkMode }) => {
           color: "#fff",
           fontWeight: "bold",
           "&:hover": {
-            background: "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
+            background:
+              "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
           },
         }}
       >

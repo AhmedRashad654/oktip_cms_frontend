@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-import { Box, TextField, Button, Typography, Snackbar, Alert } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import API from "./icons/API";
 import { axiosInstance } from "../axios/axios";
-
-
 
 const HowItWorks = ({ darkMode }) => {
   // ✅ حالة البطاقة النشطة
@@ -62,7 +67,10 @@ const HowItWorks = ({ darkMode }) => {
     try {
       const response = await axiosInstance.patch(`/api-page/how-it-works`, {
         title: { ar: formData.titleAr, en: formData.titleEn },
-        description: { ar: formData.descriptionAr.replace(/\n/g, "\\n"), en: formData.descriptionEn },
+        description: {
+          ar: formData.descriptionAr.replace(/\n/g, "\\n"),
+          en: formData.descriptionEn,
+        },
         image: formData.image, // إرسال الصورة إذا كانت متاحة
       });
 
@@ -113,10 +121,62 @@ const HowItWorks = ({ darkMode }) => {
           mb: 3,
         }}
       >
-        <TextField label="Title (Arabic)" name="titleAr" value={formData.titleAr} onChange={handleChange} multiline rows={3} />
-        <TextField label="Title (English)" name="titleEn" value={formData.titleEn} onChange={handleChange} multiline rows={3} />
-        <TextField label="Description (Arabic)" name="descriptionAr" value={formData.descriptionAr} onChange={handleChange} multiline rows={5} />
-        <TextField label="Description (English)" name="descriptionEn" value={formData.descriptionEn} onChange={handleChange} multiline rows={5} />
+        <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          label="Title (Arabic)"
+          name="titleAr"
+          value={formData.titleAr}
+          onChange={handleChange}
+          multiline
+          rows={3}
+        />
+        <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          label="Title (English)"
+          name="titleEn"
+          value={formData.titleEn}
+          onChange={handleChange}
+          multiline
+          rows={3}
+        />
+        <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          label="Description (Arabic)"
+          name="descriptionAr"
+          value={formData.descriptionAr}
+          onChange={handleChange}
+          multiline
+          rows={5}
+        />
+        <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          label="Description (English)"
+          name="descriptionEn"
+          value={formData.descriptionEn}
+          onChange={handleChange}
+          multiline
+          rows={5}
+        />
       </Box>
 
       {/* ✅ زر الحفظ */}
@@ -130,7 +190,8 @@ const HowItWorks = ({ darkMode }) => {
           color: "#fff",
           fontWeight: "bold",
           "&:hover": {
-            background: "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
+            background:
+              "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
           },
         }}
       >
@@ -138,7 +199,11 @@ const HowItWorks = ({ darkMode }) => {
       </Button>
 
       {/* ✅ Snackbar لإظهار نجاح أو فشل العملية */}
-      <Snackbar open={snackbar.open} autoHideDuration={3000} onClose={handleCloseSnackbar}>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
         <Alert onClose={handleCloseSnackbar} severity={snackbar.severity}>
           {snackbar.message}
         </Alert>
