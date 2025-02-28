@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Box, TextField, Button, Typography, Snackbar, Alert } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import API from "./icons/API";
 import { axiosInstance } from "../axios/axios";
-
-
 
 function Offer1({ darkMode }) {
   // ✅ حفظ البيانات القادمة من الـ API
@@ -107,6 +112,12 @@ function Offer1({ darkMode }) {
         }}
       >
         <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
           label="Title (Arabic)"
           name="titleAr"
           value={formData.titleAr}
@@ -120,6 +131,12 @@ function Offer1({ darkMode }) {
           }}
         />
         <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
           label="Title (English)"
           name="titleEn"
           value={formData.titleEn}
@@ -133,6 +150,12 @@ function Offer1({ darkMode }) {
           }}
         />
         <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
           label="Description (Arabic)"
           name="descriptionAr"
           value={formData.descriptionAr}
@@ -146,6 +169,12 @@ function Offer1({ darkMode }) {
           }}
         />
         <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
           label="Description (English)"
           name="descriptionEn"
           value={formData.descriptionEn}
@@ -171,7 +200,8 @@ function Offer1({ darkMode }) {
           color: "#fff",
           fontWeight: "bold",
           "&:hover": {
-            background: "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
+            background:
+              "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
           },
         }}
       >

@@ -208,6 +208,7 @@ const FAQPage = ({ darkMode }) => {
         variant="h6"
         component="h1"
         sx={{
+          mt: 3,
           mb: 3,
           fontWeight: "bold",
           display: "flex",
@@ -217,7 +218,16 @@ const FAQPage = ({ darkMode }) => {
         Landing Page / FAQ
       </Typography>
 
-      <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 4 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: { xs: "center", sm: "flex-start" }, // Center on small screens
+          gap: 2,
+          mb: 4,
+        }}
+      >
         <ToggleButtonGroup
           value={activeButton}
           exclusive
@@ -229,6 +239,9 @@ const FAQPage = ({ darkMode }) => {
             }
           }}
           sx={{
+            display: "flex",
+            flexWrap: "wrap", // Ensures buttons wrap on smaller screens
+            justifyContent: { xs: "center", sm: "flex-start" }, // Center-align on small screens
             "& .MuiToggleButton-root": {
               borderRadius: "8px",
               textTransform: "none",
@@ -244,17 +257,13 @@ const FAQPage = ({ darkMode }) => {
             },
           }}
         >
-          {buttons.map((button) => {
-            count++;
-            return (
-              <>
-                <ToggleButton key={button.order} value={button.order}>
-                  {number[count]}
-                </ToggleButton>
-              </>
-            );
-          })}
+          {buttons.map((button, index) => (
+            <ToggleButton key={button.order} value={button.order}>
+              {number[index + 1]}
+            </ToggleButton>
+          ))}
         </ToggleButtonGroup>
+
         <Button
           disabled={buttons.length === 8}
           variant="outlined"
@@ -265,6 +274,7 @@ const FAQPage = ({ darkMode }) => {
             textTransform: "none",
             color: darkMode ? "#fff" : "#000",
             borderColor: darkMode ? "#fff" : "#000",
+            minWidth: { xs: "100%", sm: "auto" }, // Full width on extra small screens
             "&:hover": {
               backgroundColor: darkMode ? "#131D32" : "#f5f5f5",
               borderColor: "#9022FF",
@@ -374,11 +384,12 @@ const FAQPage = ({ darkMode }) => {
           variant="contained"
           sx={{
             borderRadius: "12px",
-            padding: "10px 20px",
+            padding: { xs: "8px 16px", sm: "10px 20px" }, // Adjust padding on smaller screens
             background:
               "linear-gradient(238deg, #E9BA00 -48.58%, #FF2A66 59.6%)",
             color: "#fff",
             fontWeight: "bold",
+            fontSize: { xs: "14px", sm: "16px" }, // Adjust font size on smaller screens
             "&:hover": {
               background:
                 "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
@@ -387,6 +398,7 @@ const FAQPage = ({ darkMode }) => {
         >
           Save Changes
         </Button>
+
         <Button
           onClick={() => {
             if (!order) {

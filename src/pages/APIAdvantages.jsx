@@ -49,7 +49,11 @@ const APIAdvantages = ({ darkMode }) => {
         });
       })
       .catch(() => {
-        setSnackbar({ open: true, message: "Failed to load data", severity: "error" });
+        setSnackbar({
+          open: true,
+          message: "Failed to load data",
+          severity: "error",
+        });
       });
   }, [activeTab]);
 
@@ -74,16 +78,24 @@ const APIAdvantages = ({ darkMode }) => {
   // إرسال البيانات إلى API
   const handleSave = () => {
     axiosInstance
-      .patch((`/${apiEndpoints[activeTab]}`), {
+      .patch(`/${apiEndpoints[activeTab]}`, {
         title: { ar: apiData.titleAr, en: apiData.titleEn },
         description: { ar: apiData.descriptionAr, en: apiData.descriptionEn },
         image: apiData.image, // إرسال الصورة كـ Base64
       })
       .then(() => {
-        setSnackbar({ open: true, message: "Data updated successfully!", severity: "success" });
+        setSnackbar({
+          open: true,
+          message: "Data updated successfully!",
+          severity: "success",
+        });
       })
       .catch(() => {
-        setSnackbar({ open: true, message: "Failed to update data", severity: "error" });
+        setSnackbar({
+          open: true,
+          message: "Failed to update data",
+          severity: "error",
+        });
       });
   };
 
@@ -105,20 +117,30 @@ const APIAdvantages = ({ darkMode }) => {
       </Box>
 
       {/* الأزرار */}
-      <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
+      <Box sx={{ display: "flex", gap: 2, mb: 3, flexWrap: "wrap" }}>
         {["One", "Two", "Three", "Four"].map((tab, index) => (
           <Button
             key={tab}
             onClick={() => setActiveTab(index)}
             sx={{
               borderRadius: "8px",
-              background: activeTab === index ? "#9022FF" : darkMode ? "#131D32" : "#f5f5f5",
+              background:
+                activeTab === index
+                  ? "#9022FF"
+                  : darkMode
+                  ? "#131D32"
+                  : "#f5f5f5",
               color: activeTab === index ? "#fff" : darkMode ? "#fff" : "#000",
               fontWeight: "bold",
               padding: "10px 20px",
               textTransform: "none",
               "&:hover": {
-                background: activeTab === index ? "#9022FF" : darkMode ? "#1E2A40" : "#e0e0e0",
+                background:
+                  activeTab === index
+                    ? "#9022FF"
+                    : darkMode
+                    ? "#1E2A40"
+                    : "#e0e0e0",
               },
             }}
           >
@@ -128,11 +150,70 @@ const APIAdvantages = ({ darkMode }) => {
       </Box>
 
       {/* الحقول */}
-      <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" }, gap: 2, mb: 3 }}>
-        <TextField label="Title (Arabic)" name="titleAr" value={apiData.titleAr} onChange={handleChange} multiline rows={2} />
-        <TextField label="Title (English)" name="titleEn" value={apiData.titleEn} onChange={handleChange} multiline rows={2} />
-        <TextField label="Description (Arabic)" name="descriptionAr" value={apiData.descriptionAr} onChange={handleChange} multiline rows={5} />
-        <TextField label="Description (English)" name="descriptionEn" value={apiData.descriptionEn} onChange={handleChange} multiline rows={5} />
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+          gap: 2,
+          mb: 3,
+        }}
+      >
+        <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          label="Title (Arabic)"
+          name="titleAr"
+          value={apiData.titleAr}
+          onChange={handleChange}
+          multiline
+          rows={2}
+        />
+        <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          label="Title (English)"
+          name="titleEn"
+          value={apiData.titleEn}
+          onChange={handleChange}
+          multiline
+          rows={2}
+        />
+        <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          label="Description (Arabic)"
+          name="descriptionAr"
+          value={apiData.descriptionAr}
+          onChange={handleChange}
+          multiline
+          rows={5}
+        />
+        <TextField
+          InputProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          InputLabelProps={{
+            style: { color: darkMode ? "#fff" : "#000" },
+          }}
+          label="Description (English)"
+          name="descriptionEn"
+          value={apiData.descriptionEn}
+          onChange={handleChange}
+          multiline
+          rows={5}
+        />
       </Box>
 
       {/* رفع الصورة وعرضها */}
@@ -144,7 +225,12 @@ const APIAdvantages = ({ darkMode }) => {
             <img
               src={apiData.image}
               alt="Uploaded Preview"
-              style={{ width: "150px", height: "150px", borderRadius: "8px" }}
+              style={{
+                width: "100%",
+                maxWidth: "150px",
+                height: "150px",
+                borderRadius: "8px",
+              }}
             />
           </Box>
         )}
@@ -160,15 +246,26 @@ const APIAdvantages = ({ darkMode }) => {
           background: "linear-gradient(238deg, #E9BA00 -48.58%, #FF2A66 59.6%)",
           color: "#fff",
           fontWeight: "bold",
-          "&:hover": { background: "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)" },
+          "&:hover": {
+            background:
+              "linear-gradient(238deg, #FF2A66 -48.58%, #E9BA00 59.6%)",
+          },
         }}
       >
         Save Changes
       </Button>
 
       {/* رسالة النجاح أو الفشل */}
-      <Snackbar open={snackbar.open} autoHideDuration={3000} onClose={() => setSnackbar({ ...snackbar, open: false })}>
-        <Alert onClose={() => setSnackbar({ ...snackbar, open: false })} severity={snackbar.severity} sx={{ width: "100%" }}>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+      >
+        <Alert
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+        >
           {snackbar.message}
         </Alert>
       </Snackbar>
