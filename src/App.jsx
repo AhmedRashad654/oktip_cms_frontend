@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import {
@@ -18,9 +18,10 @@ import APiPage from "./pages/ApiPage/APIPage";
 import TermsOfUse1 from "./pages/TermsofUse1";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Footer from "./pages/Footer";
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [ language, setLanguage ] = useState("en");
+  const [language, setLanguage] = useState("en");
   const theme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",

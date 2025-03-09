@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 
-function FourdSection1({data,language}) {
+function FourdSection1({ data, language }) {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark";
   return (
@@ -29,9 +29,14 @@ function FourdSection1({data,language}) {
           left: 0,
           width: "100%",
           height: "100%",
-          background: isDarkMode
-            ? "linear-gradient(270deg, #050A17 0%, rgba(5, 10, 23, 0.90) 52.53%, rgba(5, 10, 23, 0.60) 97.53%)"
-            : "linear-gradient(270deg, #ffffff 0%, rgba(255, 255, 255, 0.90) 52.53%, rgba(255, 255, 255, 0.60) 97.53%)",
+          background:
+            theme.palette.mode === "dark"
+              ? language === "ar"
+                ? "linear-gradient(270deg, #050A17 0%, rgba(5, 10, 23, 0.90) 52.53%, rgba(5, 10, 23, 0.60) 97.53%)"
+                : "linear-gradient(90deg, #050A17 0%, rgba(5, 10, 23, 0.90) 52.53%, rgba(5, 10, 23, 0.60) 97.53%)"
+              : language === "ar"
+              ? "linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0.90) 52.53%, rgba(255, 255, 255, 0.30) 97.53%)"
+              : "linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0.90) 52.53%, rgba(255, 255, 255, 0.30) 97.53%)",
           zIndex: 1,
         },
       }}
@@ -51,7 +56,12 @@ function FourdSection1({data,language}) {
         }}
       >
         {/* النصوص */}
-        <Box sx={{ textAlign: language === "en"?"left":"right", maxWidth: "500px" }}>
+        <Box
+          sx={{
+            textAlign: language === "en" ? "left" : "right",
+            maxWidth: "500px",
+          }}
+        >
           {/* ✅ العنوان */}
           <Typography
             variant="h4"
@@ -63,7 +73,7 @@ function FourdSection1({data,language}) {
               marginBottom: "20px",
             }}
           >
-            {data?.title[language]} 
+            {data?.title[language]}
           </Typography>
 
           {/* ✅ الوصف */}

@@ -25,14 +25,14 @@ function Home({ darkMode, language }) {
   function getAllDateHomePage() {
     return axiosInstance.get(`/translate/landing?lang=${language}`);
   }
-  const { data,isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["getAllDateHomePage", language],
     queryFn: getAllDateHomePage,
   });
 
   return (
     <>
-      <Backdrop sx={{ color: "#fff", zIndex: 1201 }} open={isLoading} >
+      <Backdrop sx={{ color: "#fff", zIndex: 1201 }} open={isLoading}>
         <CircularProgress color="inherit" />
       </Backdrop>
       <Box
@@ -46,7 +46,7 @@ function Home({ darkMode, language }) {
           textAlign: "center",
 
           height: isMobile ? "auto" : "100vh",
-          padding: {md: "20px"},
+          padding: { md: "20px" },
           paddingTop: isMobile ? "100px" : "60px",
           color: "#ffffff",
           position: "relative",
@@ -155,7 +155,6 @@ function Home({ darkMode, language }) {
             wordWrap: "break-word",
             color: theme.palette.mode === "dark" ? "white" : "black",
             fontFamily: "Tajawal, sans-serif",
-
           }}
         >
           {data?.data?.header?.title[language]}
@@ -185,6 +184,7 @@ function Home({ darkMode, language }) {
         </Typography>
 
         <Button
+          href="https://Ok-pin.com"
           variant="contained"
           color="primary"
           className="start-button"

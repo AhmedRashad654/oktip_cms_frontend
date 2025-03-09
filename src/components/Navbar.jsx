@@ -366,7 +366,8 @@ function Navbar({ darkMode, setDarkMode, setLanguage, language }) {
             )}
           </IconButton>
 
-          <button
+          <a
+            href="https://Ok-pin.com"
             style={{
               background: "var(--primary-pink, #FF2A66)",
               color: "var(--general-btn-text, #FFF)",
@@ -388,7 +389,7 @@ function Navbar({ darkMode, setDarkMode, setLanguage, language }) {
             }}
           >
             {language === "ar" ? "ابدأ الآن معنا!" : "Start Now"}
-          </button>
+          </a>
 
           {/* Mobile Menu Button */}
           {isMobile && (

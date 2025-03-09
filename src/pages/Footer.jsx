@@ -39,7 +39,6 @@ const Footer = ({ language, darkMode }) => {
     queryKey: ["getSocialMedia", language],
     queryFn: getSocialMedia,
   });
-
   return (
     <Box
       sx={{
@@ -465,7 +464,7 @@ const Footer = ({ language, darkMode }) => {
         }}
       >
         {language === "en"
-          ? "All rights reserved © 2024 OKpin"
+          ? "All rights reserved © 2025 OKpin"
           : "جميع الحقوق محفوظة © 2025 OKpin"}
       </Typography>
     </Box>

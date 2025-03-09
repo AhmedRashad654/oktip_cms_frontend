@@ -13,6 +13,7 @@ import Logo from "./icons/Logo";
 import { axiosInstance } from "../axios/axios";
 import { useQuery } from "@tanstack/react-query";
 import background from "../../public/background.jpeg";
+import LinksSocialMedia from "./LinksSocialMedia";
 const TermsOfUse1 = ({ theme, language }) => {
   const containerBackgroundColor = theme === "dark" ? "#00040F" : "#FFFFFF";
   const textColor = theme === "dark" ? "#FFFFFF" : "#000000";
@@ -94,61 +95,7 @@ const TermsOfUse1 = ({ theme, language }) => {
             }}
           />
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              gap: "20px",
-              mt: 3,
-            }}
-          >
-            <IconButton
-              href="#"
-              sx={{
-                backgroundColor: theme === "dark" ? "#090F21" : "#0059FF",
-                padding: "9px",
-                height: "40px",
-              }}
-            >
-              <Facebook />
-            </IconButton>
-            <IconButton
-              href="#"
-              sx={{
-                color: "#FF2A66",
-                backgroundColor: "black",
-                padding: "11px",
-                height: "40px",
-                "&:hover": {
-                  backgroundColor: "black",
-                },
-              }}
-            >
-              <Twitter />
-            </IconButton>
-            <IconButton
-              href="#"
-              sx={{
-                color: "#FF2A66",
-                backgroundColor: theme === "dark" ? "#090F21" : "#DFE3E7",
-                padding: "11px",
-                height: "40px",
-              }}
-            >
-              <Whatsappicon />
-            </IconButton>
-            <IconButton
-              href="#"
-              sx={{
-                color: "#FF2A66",
-                backgroundColor: theme === "dark" ? "#090F21" : "#DFE3E7",
-                padding: "11px",
-                height: "40px",
-              }}
-            >
-              <Telegram />
-            </IconButton>
-          </Box>
+          <LinksSocialMedia language={language} theme={theme} />
         </Box>
       </Box>
     </>
